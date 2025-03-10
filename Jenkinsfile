@@ -29,7 +29,7 @@ pipeline {
                 script {
                     sh 'git config --global user.name "Srushti Annigeri"'
                     sh 'git config --global user.email "annigerisrushti@gmail.com"'
-                    sh 'git checkout main'
+                    sh 'git checkout -B main origin/main'
                     sh 'git add -A'
                     sh 'git commit -m "Added hello.cpp file" || echo "No changes to commit"'
                 }
