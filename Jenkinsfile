@@ -4,7 +4,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/srushtiannigeri/PES2UG22CS581_Jenkins.git',
+                        credentialsId: 'github-credentials-id'
+                    ]]
+                ])
             }
         }
         
@@ -19,7 +26,10 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh './PES2UG22CS581-1'
+                    sh '''
+                    chmod +x PES2UG22CS581-1
+                    ./PES2UG22CS581-1
+                    '''
                 }
             }
         }
@@ -29,16 +39,11 @@ pipeline {
                 script {
                     sh 'git config --global user.name "Srushti Annigeri"'
                     sh 'git config --global user.email "annigerisrushti@gmail.com"'
-                    sh 'git checkout -B main origin/main'
+                    sh 'git checkout main'
                     sh 'git add -A'
                     sh 'git commit -m "Added hello.cpp file" || echo "No changes to commit"'
+                    sh 'git push origin main'
                 }
-            }
-        }
-
-        stage('Post Actions') {
-            steps {
-                echo "Pipeline completed successfully"
             }
         }
     }
