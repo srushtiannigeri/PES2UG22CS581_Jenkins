@@ -35,18 +35,16 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                script {
-                    sh 'git config --global user.name "Srushti Annigeri"'
-                    sh 'git config --global user.email "annigerisrushti@gmail.com"'
-                    sh 'git checkout main'
-                    sh 'git add -A'
-                    sh 'git commit -m "Added hello.cpp file" || echo "No changes to commit"'
-                    sh 'git push origin main'
-                }
-            }
+    steps {
+        script {
+            sh 'git config --global user.name "Srushti Annigeri"'
+            sh 'git config --global user.email "annigerisrushti@gmail.com"'
+            // Disambiguate branch checkout
+            sh 'git checkout -- main'  
         }
     }
+}
+
 
     post {
         success {
