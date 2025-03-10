@@ -11,7 +11,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'g++ -o PES2UG22CS581-1 hello.cpp'
+                    // Intentional Error: Typo in 'g++' command or invalid file
+                    sh 'g++ -o PES2UG22CS581-1 hello.cp' // Error: wrong file extension
                 }
             }
         }
@@ -48,7 +49,7 @@ pipeline {
             echo "Build and deployment successful!"
         }
         failure {
-            echo "Pipeline failed"
+            echo "Pipeline failed" 
         }
     }
 }
